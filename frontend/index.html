@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DocuMind AI — Intelligent Document Processing Platform</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>DocuMind <span>AI</span></h1>
+          <span class="subtext">Document Intelligence</span>
+        </div>
+      </div>
+
+      <nav class="nav-menu">
+        <button class="nav-item active" data-tab="overview">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          Overview
+        </button>
+        <button class="nav-item" data-tab="workspace">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+          Documents
+        </button>
+        <button class="nav-item" data-tab="ocr">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 7 4 4 20 4 20 7"></polyline><line x1="9" y1="20" x2="15" y2="20"></line><line x1="12" y1="4" x2="12" y2="20"></line></svg>
+          OCR Inspection
+        </button>
+        <button class="nav-item" data-tab="extraction">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+          Structured Fields
+        </button>
+        <button class="nav-item" data-tab="review">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><polyline points="16 11 18 13 22 9"></polyline></svg>
+          Review Center <span class="badge badge-warning" id="nav-review-count">0</span>
+        </button>
+        <button class="nav-item" data-tab="history">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          Processing Pipeline
+        </button>
+        <button class="nav-item" data-tab="settings">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          Settings
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="system-status">
+          <span class="status-indicator online"></span>
+          <span id="system-health-text">Online & Ready</span>
+        </div>
+        <div class="version">v1.0.0 &bull; Python 3.11</div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Top Header Bar -->
+      <header class="top-header">
+        <div class="header-title">
+          <h2 id="page-title">Overview Dashboard</h2>
+          <p id="page-subtitle">Real-time document ingestion metrics and intelligence telemetry</p>
+        </div>
+        <div class="header-actions">
+          <button class="btn btn-secondary" id="btn-quick-refresh" title="Refresh Data">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+            Refresh
+          </button>
+          <button class="btn btn-primary" id="btn-open-upload">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+            Upload Document
+          </button>
+        </div>
+      </header>
+
+      <!-- TAB 1: OVERVIEW DASHBOARD -->
+      <section id="tab-overview" class="tab-pane active">
+        <!-- KPI Metrics Grid -->
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-icon icon-blue">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path></svg>
+            </div>
+            <div class="kpi-data">
+              <span class="kpi-label">Total Documents</span>
+              <span class="kpi-value" id="kpi-total-docs">0</span>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-icon icon-green">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            </div>
+            <div class="kpi-data">
+              <span class="kpi-label">Processed Successfully</span>
+              <span class="kpi-value" id="kpi-processed-docs">0</span>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-icon icon-amber">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            </div>
+            <div class="kpi-data">
+              <span class="kpi-label">Pending Reviews</span>
+              <span class="kpi-value" id="kpi-pending-reviews">0</span>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-icon icon-purple">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+            </div>
+            <div class="kpi-data">
+              <span class="kpi-label">Average Confidence</span>
+              <span class="kpi-value" id="kpi-avg-confidence">0.00%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Charts & Activity Row -->
+        <div class="dashboard-row">
+          <div class="card card-half">
+            <div class="card-header">
+              <h3>Document Distribution by Category</h3>
+            </div>
+            <div class="card-body">
+              <div id="category-distribution-list" class="distribution-bars">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+          </div>
+
+          <div class="card card-half">
+            <div class="card-header">
+              <h3>Pipeline Status Breakdown</h3>
+            </div>
+            <div class="card-body">
+              <div id="status-distribution-list" class="distribution-bars">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Documents Table -->
+        <div class="card">
+          <div class="card-header flex-between">
+            <h3>Recent Documents</h3>
+            <button class="btn btn-sm btn-outline" onclick="app.switchTab('workspace')">View All Documents &rarr;</button>
+          </div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="data-table" id="recent-documents-table">
+                <thead>
+                  <tr>
+                    <th>Filename</th>
+                    <th>Category</th>
+                    <th>Pages</th>
+                    <th>Confidence</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="recent-documents-tbody">
+                  <!-- Injected via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 2: DOCUMENT WORKSPACE -->
+      <section id="tab-workspace" class="tab-pane">
+        <!-- Upload Modal / Zone -->
+        <div class="card mb-4" id="upload-container">
+          <div class="card-header flex-between">
+            <h3>Ingest New Document</h3>
+            <span class="text-muted">Supported: PDF, PNG, JPG, DOCX, TXT (Max 25MB)</span>
+          </div>
+          <div class="card-body">
+            <div class="drop-zone" id="drop-zone">
+              <input type="file" id="file-input" class="file-input-hidden" accept=".pdf,.png,.jpg,.jpeg,.docx,.txt">
+              <div class="drop-zone-content">
+                <div class="upload-icon">
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                </div>
+                <h4>Drag & Drop Document Here or <span class="highlight">Browse</span></h4>
+                <p>SHA-256 duplicate detection and MIME verification enabled automatically.</p>
+                <div id="upload-status" class="upload-status-indicator"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter & Search Toolbar -->
+        <div class="toolbar-card">
+          <div class="search-input-wrapper">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" id="doc-search-input" placeholder="Search by document name...">
+          </div>
+          <div class="filter-controls">
+            <select id="filter-status-select" class="form-select">
+              <option value="">All Statuses</option>
+              <option value="PENDING">Pending</option>
+              <option value="PROCESSING">Processing</option>
+              <option value="NEEDS_REVIEW">Needs Review</option>
+              <option value="COMPLETED">Completed</option>
+              <option value="FAILED">Failed</option>
+            </select>
+            <select id="filter-category-select" class="form-select">
+              <option value="">All Categories</option>
+              <option value="INVOICE">Invoice</option>
+              <option value="PASSPORT">Passport</option>
+              <option value="CONTRACT">Contract</option>
+              <option value="GENERAL_DOCUMENT">General Document</option>
+              <option value="BUSINESS_DOCUMENT">Business Document</option>
+              <option value="UNKNOWN">Unknown</option>
+            </select>
+            <button class="btn btn-secondary" id="btn-apply-filter">Apply</button>
+          </div>
+        </div>
+
+        <!-- Document Table -->
+        <div class="card">
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Document</th>
+                    <th>Category</th>
+                    <th>File Size</th>
+                    <th>Confidence</th>
+                    <th>Stage</th>
+                    <th>Status</th>
+                    <th>Created</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="all-documents-tbody">
+                  <!-- Injected via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 3: OCR INSPECTION -->
+      <section id="tab-ocr" class="tab-pane">
+        <div class="workspace-split">
+          <!-- Document Selector & Raw Text -->
+          <div class="card col-left">
+            <div class="card-header flex-between">
+              <h3>Extracted Text & Blocks</h3>
+              <div class="selector-wrapper">
+                <select id="ocr-doc-selector" class="form-select sm"></select>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="ocr-meta-bar">
+                <div>Provider: <span class="badge badge-info" id="ocr-provider-badge">MockOCR</span></div>
+                <div>Avg OCR Confidence: <span class="font-bold text-success" id="ocr-confidence-text">--</span></div>
+                <div>Blocks Found: <span class="font-bold" id="ocr-total-blocks">0</span></div>
+              </div>
+              <div class="code-preview" id="ocr-raw-text">Select a processed document to view extracted text.</div>
+            </div>
+          </div>
+
+          <!-- Text Block Geometry & Coordinates -->
+          <div class="card col-right">
+            <div class="card-header">
+              <h3>Spatial Layout Coordinates</h3>
+            </div>
+            <div class="card-body p-0">
+              <div class="table-responsive max-h-500">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Order</th>
+                      <th>Type</th>
+                      <th>Bounding Box (x0, y0, x1, y1)</th>
+                      <th>Conf</th>
+                      <th>Text Preview</th>
+                    </tr>
+                  </thead>
+                  <tbody id="ocr-blocks-tbody">
+                    <!-- Injected via JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 4: STRUCTURED FIELDS EXTRACTION -->
+      <section id="tab-extraction" class="tab-pane">
+        <div class="toolbar-card">
+          <div class="flex-row gap-3">
+            <label for="extraction-doc-selector" class="self-center font-medium">Select Document:</label>
+            <select id="extraction-doc-selector" class="form-select" style="min-width: 320px;"></select>
+          </div>
+          <div id="extraction-category-badge-container"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-header flex-between">
+            <h3>Structured Field Ledger & Confidence Scores</h3>
+            <span class="text-muted text-sm">Default Review Threshold: 0.70</span>
+          </div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Field Name</th>
+                    <th>Extracted Value</th>
+                    <th>Normalized Value</th>
+                    <th>Composite Confidence</th>
+                    <th>OCR / Ext / Val</th>
+                    <th>Status</th>
+                    <th>Review Req.</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="extracted-fields-tbody">
+                  <!-- Injected via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Validation Results Card -->
+        <div class="card mt-4">
+          <div class="card-header">
+            <h3>Automated Validation Assertions & MRZ/Math Rules</h3>
+          </div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Rule Name</th>
+                    <th>Type</th>
+                    <th>Field Target</th>
+                    <th>Result</th>
+                    <th>Diagnostic Message</th>
+                  </tr>
+                </thead>
+                <tbody id="validation-assertions-tbody">
+                  <!-- Injected via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 5: HUMAN REVIEW CENTER -->
+      <section id="tab-review" class="tab-pane">
+        <div class="review-layout">
+          <!-- Queue Sidebar -->
+          <div class="card review-queue-card">
+            <div class="card-header flex-between">
+              <h3>Review Queue</h3>
+              <select id="review-filter-status" class="form-select sm">
+                <option value="PENDING">Pending</option>
+                <option value="APPROVED">Approved</option>
+                <option value="REJECTED">Rejected</option>
+              </select>
+            </div>
+            <div class="review-queue-list" id="review-queue-list">
+              <!-- Injected via JS -->
+            </div>
+          </div>
+
+          <!-- Active Review Task Workarea -->
+          <div class="card review-workarea-card" id="review-workarea">
+            <div class="card-header flex-between">
+              <div>
+                <h3 id="review-doc-title">Select a task from the queue</h3>
+                <span class="text-muted text-sm" id="review-task-meta">--</span>
+              </div>
+              <div class="review-actions-group" id="review-actions-group" style="display: none;">
+                <button class="btn btn-danger" id="btn-reject-task">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+                  Reject
+                </button>
+                <button class="btn btn-success" id="btn-approve-task">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Approve Document
+                </button>
+              </div>
+            </div>
+            <div class="card-body" id="review-task-body">
+              <div class="empty-state">
+                <p>Select a flagged document from the left review queue to inspect low-confidence fields and perform manual corrections.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 6: PROCESSING HISTORY -->
+      <section id="tab-history" class="tab-pane">
+        <div class="toolbar-card">
+          <label for="history-doc-selector" class="self-center font-medium">Select Document:</label>
+          <select id="history-doc-selector" class="form-select" style="min-width: 350px;"></select>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Pipeline Stage Execution Stepper</h3>
+          </div>
+          <div class="card-body">
+            <div class="pipeline-stepper" id="pipeline-stepper">
+              <!-- Injected via JS -->
+            </div>
+          </div>
+        </div>
+
+        <div class="card mt-4">
+          <div class="card-header">
+            <h3>Execution Job Audit Logs</h3>
+          </div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Job ID</th>
+                    <th>Stage</th>
+                    <th>Status</th>
+                    <th>Started At</th>
+                    <th>Duration (ms)</th>
+                    <th>Diagnostics / Error</th>
+                  </tr>
+                </thead>
+                <tbody id="processing-jobs-tbody">
+                  <!-- Injected via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 7: SETTINGS -->
+      <section id="tab-settings" class="tab-pane">
+        <div class="card max-w-800">
+          <div class="card-header">
+            <h3>Platform Configuration</h3>
+          </div>
+          <div class="card-body settings-form">
+            <div class="form-group">
+              <label>OCR Engine Provider</label>
+              <select id="settings-ocr-provider" class="form-select">
+                <option value="mock">Deterministic Mock OCR (Offline Testing & Fast Unit Tests)</option>
+                <option value="paddle">PaddleOCR (Deep Learning Vision Engine)</option>
+                <option value="auto">Auto / Hybrid (Deep Learning with Mock Fallback)</option>
+              </select>
+              <span class="help-text">Select active provider for document OCR processing.</span>
+            </div>
+
+            <div class="form-group">
+              <label>Human Review Confidence Threshold (<span id="threshold-val-display">0.70</span>)</label>
+              <input type="range" id="settings-threshold" min="0.50" max="0.95" step="0.05" value="0.70" class="form-range">
+              <span class="help-text">Fields with overall confidence below this threshold are automatically routed to the Human Review Queue.</span>
+            </div>
+
+            <div class="form-group">
+              <label>Local AI Model Hook (Ollama Integration)</label>
+              <input type="text" id="settings-ollama-url" value="http://localhost:11434" class="form-input" placeholder="http://localhost:11434">
+              <span class="help-text">Optional local endpoint for LLM-assisted zero-shot extraction.</span>
+            </div>
+
+            <div class="form-group">
+              <label>Data Management</label>
+              <button class="btn btn-secondary" id="btn-reseed-demo">Re-seed Demo Data & Samples</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Field Edit Modal -->
+  <div class="modal" id="field-edit-modal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 id="modal-field-title">Edit Field Value</h3>
+        <button class="btn-close" id="btn-close-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="edit-field-id">
+        <div class="form-group">
+          <label>Original Extracted Value</label>
+          <input type="text" id="edit-original-value" class="form-input text-muted" readonly>
+        </div>
+        <div class="form-group">
+          <label>Corrected Value</label>
+          <input type="text" id="edit-field-value" class="form-input" autofocus>
+        </div>
+        <div class="form-group">
+          <label>Reviewer Notes / Justification</label>
+          <input type="text" id="edit-reviewer-notes" class="form-input" placeholder="e.g. Corrected OCR misspelling from document header">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="btn-cancel-edit">Cancel</button>
+        <button class="btn btn-primary" id="btn-save-edit">Save Correction</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div id="toast" class="toast"></div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
+
